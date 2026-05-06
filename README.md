@@ -5,7 +5,6 @@
 [![Angular](https://img.shields.io/badge/Angular-18+-red.svg)](https://angular.dev/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/compose/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-<div align="center">
   
 ```
 ▄▄▄▄▄▄▄   ▄▄▄▄▄▄▄   ▄▄▄▄▄  ▄▄▄▄▄▄▄ ▄▄▄      ▄▄▄ 
@@ -15,7 +14,6 @@
 ███       ███  ▀███ ▄███▄ ███████▀ ███      ███ 
                     T O O L B O X
 ```
-</div>
 
 **A self-hosted, open-source converter and utility toolbox.**  
 Built with Angular and Rust, No telemetry. No accounts. Just Tools

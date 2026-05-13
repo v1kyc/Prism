@@ -1,16 +1,16 @@
+use crate::tools::image::convert;
 use axum::Router;
 use axum::extract::DefaultBodyLimit;
 use axum::routing::{get, post};
 use tower::ServiceBuilder;
 use tower_http::{cors::CorsLayer, trace::TraceLayer};
-use crate::tools::image::convert;
 
 const MAX_BODY_SIZE: usize = 1024 * 1024 * 10;
+
 pub fn router() -> Router {
     Router::new()
         .route("/", get(|| async {}))
-        .route("/api/health", get(health))
-        .route("/api/image/convert", post(convert))
+        .nest("/api", api_routes())
         .layer(
             ServiceBuilder::new()
                 .layer(TraceLayer::new_for_http())
@@ -18,6 +18,17 @@ pub fn router() -> Router {
                 .layer(DefaultBodyLimit::max(MAX_BODY_SIZE)),
         )
 }
+
+fn api_routes() -> Router {
+    Router::new()
+        .route("/health", get(health))
+        .nest("/image", image_routes())
+}
+
+fn image_routes() -> Router {
+    Router::new().route("/convert", post(convert))
+}
+
 async fn health() -> &'static str {
     "Healthy"
 }

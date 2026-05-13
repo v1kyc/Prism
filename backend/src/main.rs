@@ -3,6 +3,7 @@ use crate::router::router;
 mod router;
 mod rxtx;
 mod tools;
+pub mod auth;
 
 #[tokio::main]
 async fn main() {

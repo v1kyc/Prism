@@ -23,12 +23,18 @@ fn api_routes() -> Router {
     Router::new()
         .route("/health", get(health))
         .nest("/image", image_routes())
+        .nest("/auth", auth_routes())
+}
+async fn health() -> &'static str {
+    "Healthy"
 }
 
 fn image_routes() -> Router {
     Router::new().route("/convert", post(convert))
 }
 
-async fn health() -> &'static str {
-    "Healthy"
+fn auth_routes() -> Router {
+    Router::new()
+        .route("/register", post(""))
+        .route("/login", post(""))
 }

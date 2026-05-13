@@ -1,9 +1,9 @@
-use crate::rxtx::AppError;
 use axum::Json;
 use axum::http::StatusCode;
 use axum::response::{IntoResponse, Response};
 use serde::Serialize;
 use serde_json::json;
+use crate::rxtx::network::AppError;
 // Error response
 
 impl IntoResponse for AppError {

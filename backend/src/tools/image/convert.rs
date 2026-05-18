@@ -4,7 +4,7 @@ use axum::{
     response::Response,
 };
 use crate::{
-    rxtx::{AppError, multipart::extract},
+    rxtx::network::{AppError, multipart::extract},
     tools::image::ImageFormat,
 };
 use serde::Deserialize;

@@ -1,3 +1,4 @@
+use crate::rxtx::database::Database;
 use crate::tools::image::convert;
 use axum::Router;
 use axum::extract::DefaultBodyLimit;
@@ -7,10 +8,10 @@ use tower_http::{cors::CorsLayer, trace::TraceLayer};
 
 const MAX_BODY_SIZE: usize = 1024 * 1024 * 10;
 
-pub fn router() -> Router {
+pub fn router(db: Database) -> Router {
     Router::new()
         .route("/", get(|| async {}))
-        .nest("/api", api_routes())
+        .nest("/api", api_routes(db))
         .layer(
             ServiceBuilder::new()
                 .layer(TraceLayer::new_for_http())
@@ -19,12 +20,13 @@ pub fn router() -> Router {
         )
 }
 
-fn api_routes() -> Router {
+fn api_routes(db: Database) -> Router {
     Router::new()
         .route("/health", get(health))
         .nest("/image", image_routes())
-        .nest("/auth", auth_routes())
+        .nest("/auth", auth_routes(db))
 }
+
 async fn health() -> &'static str {
     "Healthy"
 }
@@ -33,8 +35,9 @@ fn image_routes() -> Router {
     Router::new().route("/convert", post(convert))
 }
 
-fn auth_routes() -> Router {
+fn auth_routes(db: Database) -> Router {
     Router::new()
         .route("/register", post(""))
         .route("/login", post(""))
+        .with_state(db)
 }

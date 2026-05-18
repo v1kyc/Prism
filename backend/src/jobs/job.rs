@@ -1,5 +1,5 @@
 use async_trait::async_trait;
-use crate::rxtx::AppError;
+use crate::rxtx::network::AppError;
 #[async_trait]
 trait Job
 {
